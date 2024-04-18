@@ -23,6 +23,16 @@ public class StockRepository(ApplicationDbContext context) : IStockRepository
         if (!string.IsNullOrWhiteSpace(query?.Symbol))
             stocks = stocks.Where(s => s.Symbol.ToLower().Contains(query.Symbol.ToLower()));
 
+        if (!string.IsNullOrWhiteSpace(query?.SortBy))
+        {
+            if (query.SortBy.ToLower().Equals("symbol"))
+                stocks = query.IsDesc ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderBy(s => s.Symbol);
+
+            else if (query.SortBy.ToLower().Equals("companyname"))
+                stocks = query.IsDesc ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderBy(s => s.Symbol);
+
+        }
+
         return await stocks.ToListAsync();
     }
 
