@@ -11,16 +11,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddControllers().AddNewtonsoftJson(options=>{
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultCOnnection"));
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    // options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql("Host=localhost;Port=5432;Database=finshark;Username=finshark;Password=finshark");
+    // options.UseNpgsql(configuration.GetConnectionString("Default"))
 });
 
-builder.Services.AddScoped<IStockRepository,StockRepository>();
-builder.Services.AddScoped<ICommentRepository,CommentRepository>();
+builder.Services.AddScoped<IStockRepository, StockRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 var app = builder.Build();
 

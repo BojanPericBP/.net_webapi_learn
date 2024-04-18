@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bojan\\Desktop\\Bakcend journey\\api\\api.csproj": {}
+    "/Users/bojanperic/myProjects/dotnet_webapi_learn/api/api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bojan\\Desktop\\Bakcend journey\\api\\api.csproj": {
+    "/Users/bojanperic/myProjects/dotnet_webapi_learn/api/api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bojan\\Desktop\\Bakcend journey\\api\\api.csproj",
+        "projectUniqueName": "/Users/bojanperic/myProjects/dotnet_webapi_learn/api/api.csproj",
         "projectName": "api",
-        "projectPath": "C:\\Users\\Bojan\\Desktop\\Bakcend journey\\api\\api.csproj",
-        "packagesPath": "C:\\Users\\Bojan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bojan\\Desktop\\Bakcend journey\\api\\obj\\",
+        "projectPath": "/Users/bojanperic/myProjects/dotnet_webapi_learn/api/api.csproj",
+        "packagesPath": "/Users/bojanperic/.nuget/packages/",
+        "outputPath": "/Users/bojanperic/myProjects/dotnet_webapi_learn/api/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Bojan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/bojanperic/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,12 +32,21 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "EFCore.NamingConventions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -76,6 +79,10 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -100,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
