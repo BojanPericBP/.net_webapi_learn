@@ -62,8 +62,12 @@ builder.Services.AddAuthentication(options =>
     }
 );
 
+Console.WriteLine("Zbog mene te je dobri boog...");
+
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
