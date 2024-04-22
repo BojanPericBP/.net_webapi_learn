@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers;
 
 [Route("api/tags ")]
+[ApiController]
 public class TagController(ITagRepository tagRepo) : ControllerBase
 {
     [HttpPost]

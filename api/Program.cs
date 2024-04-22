@@ -95,6 +95,7 @@ builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
@@ -111,5 +112,12 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.MapControllers();
+
+app.UseSwaggerUI(c =>
+        {
+            c.ConfigObject.AdditionalItems.Add("persistAuthorization","true");
+        });
+
+app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());
 
 app.Run();

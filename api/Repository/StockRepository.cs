@@ -84,4 +84,9 @@ public class StockRepository(ApplicationDbContext context) : IStockRepository
         return stockModel;
     }
 
+    public async Task<Stock?> GetBySymbolAsync(string symbol)
+    {
+        return await _db.Stocks.FirstOrDefaultAsync(x=> x.Symbol == symbol);
+    }
+
 }

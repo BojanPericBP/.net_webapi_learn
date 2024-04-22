@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers;
 
 [Route("api/posts")]
+[ApiController]
 public class PostController(IPostRepository postRepo) : ControllerBase
 {
     [HttpPost]
