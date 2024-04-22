@@ -1,16 +1,17 @@
 using api.Dtos.Comment;
 using api.Dtos.Comments;
+using api.Extensions;
 using api.Interfaces;
 using api.Mappers;
+using api.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.ObjectPool;
 
 namespace api.Controllers;
 
 [Route("api/comments")]
 [ApiController]
-public class CommentController(ICommentRepository commentRepo, IStockRepository stockRepo) : ControllerBase
+public class CommentController(UserManager<AppUser> userManager, ICommentRepository commentRepo, IStockRepository stockRepo) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAllAsync()
@@ -45,7 +46,12 @@ public class CommentController(ICommentRepository commentRepo, IStockRepository 
         if (stock is null)
             return NotFound();
 
+        var username = User.GetUsername();
+        var appUser = await userManager.FindByNameAsync(username);
         var comment = commentInput.ToCommentFromCreateDto(stockId);
+
+        comment.AppUserId = appUser.Id;
+
         await commentRepo.CreateAsync(comment);
 
         return CreatedAtAction("GetById", new { id = comment.Id }, comment.ToCommentDto());

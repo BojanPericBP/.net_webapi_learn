@@ -113,11 +113,6 @@ app.UseAuthentication();
 
 app.MapControllers();
 
-app.UseSwaggerUI(c =>
-        {
-            c.ConfigObject.AdditionalItems.Add("persistAuthorization","true");
-        });
-
 app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());
 
 app.Run();

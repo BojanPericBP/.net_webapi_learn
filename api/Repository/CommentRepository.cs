@@ -1,8 +1,6 @@
-using System.Data.Common;
 using api.Data;
 using api.Interfaces;
 using api.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository;
@@ -11,7 +9,9 @@ public class CommentRepository(ApplicationDbContext _db) : ICommentRepository
 {
     public async Task<List<Comment>> GetAllAsync()
     {
-        return await _db.Comments.ToListAsync();
+        return await _db.Comments
+            .Include(c => c.AppUser)
+            .ToListAsync();
     }
 
     public async Task<Comment> CreateAsync(Comment comment)
@@ -24,7 +24,9 @@ public class CommentRepository(ApplicationDbContext _db) : ICommentRepository
 
     public async Task<Comment?> GetByIdAsync(int id)
     {
-        var comment = await _db.Comments.FindAsync(id);
+        var comment = await _db.Comments
+            .Include(c => c.AppUser)
+            .FirstOrDefaultAsync(x => x.Id == id);
 
         if (comment is null)
             return null;

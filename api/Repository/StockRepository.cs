@@ -1,12 +1,9 @@
-using System.Linq.Expressions;
 using api.Data;
 using api.Dtos.Stocks;
 using api.Helpers;
 using api.Interfaces;
 using api.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.ObjectPool;
 
 namespace api.Repository;
 public class StockRepository(ApplicationDbContext context) : IStockRepository
@@ -15,7 +12,10 @@ public class StockRepository(ApplicationDbContext context) : IStockRepository
 
     public async Task<List<Stock>> GetAllAsync(QueryObject? query)
     {
-        var stocks = _db.Stocks.Include(x => x.Comments).AsQueryable();
+        var stocks = _db.Stocks
+            .Include(x => x.Comments)
+                .ThenInclude(x => x.AppUser)
+            .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(query?.CompanyName))
             stocks = stocks.Where(s => s.CopanyName.ToLower().Contains(query.CompanyName.ToLower()));
@@ -40,7 +40,10 @@ public class StockRepository(ApplicationDbContext context) : IStockRepository
 
     public async Task<Stock?> GetByIdAsync(int id)
     {
-        return await _db.Stocks.Include(x => x.Comments).FirstOrDefaultAsync(x => x.Id == id);
+        return await _db.Stocks
+            .Include(x => x.Comments)
+                .ThenInclude(x => x.AppUser)
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<Stock> CreateAsync(Stock stockModel)
